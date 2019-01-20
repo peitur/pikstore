@@ -4,6 +4,12 @@ import os, sys, re
 import json
 import getopt
 
+import piks
+import piks.utils
+import piks.defaults
+import piks.runner
+import piks.validate
+
 from pprint import pprint
 
 class Command( object ):

@@ -1,0 +1,4 @@
+
+
+KEY_SYSTEM_DEBUG="debug"
+KEY_SYSTEM_COMMAND="command"
