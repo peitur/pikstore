@@ -5,7 +5,7 @@ import getopt, traceback
 from pprint import pprint
 
 ## ugly solution for something that should not be like this... libs should be put into standard site libs
-sys.path.append( "%s/../" % ( os.path.dirname( os.path.realpath( __file__ ) )) )
+sys.path.append(  os.path.dirname( os.path.realpath( __file__ ) ) )
 
 import piks.command
 import piks.defaults
@@ -40,10 +40,10 @@ if __name__ == "__main__":
             sys.exit(1)
 
     try:
-        kcmp.compiler.Compiler( options ).run()
+        piks.command.Command( options ).run()
     except Exception as e:
         if options['debug']: print("\n*** Message:")
-        print( "ERROR: Compiler failed: %s" % (e) )
+        print( "ERROR:  Failed: %s" % (e) )
         if options['debug']:
             # https://docs.python.org/3/library/traceback.html
             print("\n*** Traceback:")
