@@ -1,25 +1,25 @@
  #!/usr/bin/env python3
 
 import os, sys, re
-import json
-import getopt
 
 import piks
 import piks.utils
 import piks.defaults
-import piks.runner
 import piks.validate
 
 from pprint import pprint
 
-class Command( object ):
+class Crypt( object ):
 
-    def __init__( self, argv, **opt ):
-        self._home = os.getenv( "HOME" )
-        
-
-    def run( self ):
+    def __init__( self, **opt ):
         pass
+
+    def encrypt( self, **opt ):
+        pass
+
+    def decrypt( self, **opt ):
+        pass
+
 
 if __name__ == "__main__":
     pass

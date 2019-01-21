@@ -6,6 +6,7 @@ import subprocess, shlex
 import piks
 import piks.utils
 import piks.validate
+import piks.file
 
 from pprint import pprint
 
@@ -52,9 +53,9 @@ class GenericCommand( object ):
         for line in prc.stdout.readlines():
             result.append( line.lstrip().rstrip() )
 
-        if prc.returncode != 0:
-            for line in prc.stderr.readlines():
-                print( "ERROR: %s" %(line.lstrip().rstrip()))
+#        if prc.returncode != 0:
+#            for line in prc.stderr.readlines():
+#                print( "ERROR: %s" %(line.lstrip().rstrip()))
 
         return result
 
@@ -141,8 +142,11 @@ class CreatePublicKey( GenericCommand ):
         return self._pubkey
 
 if __name__ == "__main__":
-    privk = CreatePrivateKey( password="test", bits="512" ).run()
+    passwd = piks.file.file_hash( os.path.realpath( __file__ ) )
+    print("PASSWORD: %s"%( passwd ))
+    
+    privk = CreatePrivateKey( password=passwd, bits="512" ).run()
     pprint( privk )
 
-    pubk = CreatePublicKey( password="test", privatekey=privk, encode="des3").run()
+    pubk = CreatePublicKey( password=passwd, privatekey=privk, encode="des3").run()
     pprint( pubk )
