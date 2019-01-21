@@ -2,3 +2,4 @@
 
 KEY_SYSTEM_DEBUG="debug"
 KEY_SYSTEM_COMMAND="command"
+KEY_SYSTEM_STDIN="stdin"

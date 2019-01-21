@@ -69,6 +69,10 @@ class Validator( object ):
         print(">> %s %s" % ( key, data ) )
         return False
 
+    def _length_same( self, length, string ):
+        if len( string ) == length:
+            return True
+        return False
 
     def validate( self, valdata, **opt ):
         results = dict()
@@ -85,11 +89,14 @@ class Validator( object ):
                 if 'search' in self._map[ v ]: rxtype = "search"
                 if 'match' in self._map[ v ]: rxtype = "match"
 
-            if v in self._map:
+            if v in self._map and rxtype:
                 if 'match_all' in self._map[ v ] and self._map[ v ]['match_all'] == True:
                     results[v] = self._all_pattern( rxtype, v, valdata[v] )
                 else:
                     results[v] = self._any_pattern( rxtype, v, valdata[v] )
+
+                if 'length' in self._map[ v ] and results[v]:
+                    results[v] = self._length_same( self._map[ v ]['length'], valdata[v] )
 
         falses = [ x for x in results if results[x] == False ]
         if len( falses ) > 0 :
