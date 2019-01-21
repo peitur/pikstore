@@ -78,7 +78,7 @@ class CreatePrivateKey( GenericCommand ):
         self._password = opt['password']
         self._algorithm = "rsa"
         self._bits = "4096"
-        self._encode = "des3"
+        self._encode = "aes256"
 
         if 'debug' in opt and opt['debug'] in (True,False): self._debug = opt['debug']
         if 'encode' in opt: self._encode = opt['encode']
@@ -88,6 +88,7 @@ class CreatePrivateKey( GenericCommand ):
         command = [ "gen%s" % ( self._algorithm ),
             "-%s" % ( self._encode ),
             "-passout", "pass:%s" %(self._password),
+            "-des3",
             self._bits
         ]
 
@@ -144,9 +145,9 @@ class CreatePublicKey( GenericCommand ):
 if __name__ == "__main__":
     passwd = piks.file.file_hash( os.path.realpath( __file__ ) )
     print("PASSWORD: %s"%( passwd ))
-    
-    privk = CreatePrivateKey( password=passwd, bits="512" ).run()
+
+    privk = CreatePrivateKey( password=passwd, bits="512" ,encode="aes256").run()
     pprint( privk )
 
-    pubk = CreatePublicKey( password=passwd, privatekey=privk, encode="des3").run()
+    pubk = CreatePublicKey( password=passwd, privatekey=privk, encode="aes256").run()
     pprint( pubk )
