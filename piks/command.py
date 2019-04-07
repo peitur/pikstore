@@ -15,7 +15,8 @@ from pprint import pprint
 class Command( object ):
 
     def __init__( self, argv, **opt ):
-        pass
+        self._home = os.getenv( "HOME" )
+        
 
     def run( self ):
         pass
