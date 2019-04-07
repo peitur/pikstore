@@ -54,7 +54,7 @@ class CreatePrivateKey( GenericCommand ):
         if 'debug' in opt and opt['debug'] in (True,False):
             self._debug = opt['debug']
 
-        if 'encode' in opt and opt['encode'] in ("des3","aes128","aes192", "aes256","camellia128","camellia192","camellia256")
+        if 'encode' in opt and opt['encode'] in ("des3","aes128","aes192", "aes256","camellia128","camellia192","camellia256"):
             self._encode = opt['encode']
 
         command = [ "genrsa",
@@ -63,7 +63,7 @@ class CreatePrivateKey( GenericCommand ):
             self._bits
         ]
 
-        super().__init__( command, debug=self._debug )
+        GenericCommand.__init__( self, command, debug=self._debug )
 
 
     def run( self ):
@@ -76,7 +76,7 @@ class CreatePrivateKey( GenericCommand ):
 class CreatePublicKey( GenericCommand ):
 
     def __init__( self, **opt ):
-        super().__init__()
+        GenericCommand.__init__( self, None, **opt  )
         self._password = opt['password']
         self._algorith = opt['algorith']
         self._pkey = opt['privatekey']
